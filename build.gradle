@@ -4,7 +4,7 @@ plugins {
     alias libs.plugins.dorongold.task.tree
     alias libs.plugins.github.johnrengelman.shadow
     id 'maven-publish'
-    alias libs.plugins.researchgate.release
+    id 'pl.allegro.tech.build.axion-release' version '1.13.6'
     id 'jacoco'
     alias libs.plugins.sonarqube
     id 'repositories'
@@ -47,18 +47,15 @@ subprojects {
         }
     }
 
-    release {
-        // Disable check snapshots temporarily
-        failOnSnapshotDependencies = false
-        failOnCommitNeeded = false
-        tagTemplate = 'v${version}'
-        buildTasks = ['build']
-        git {
-            // To release from any branch
-            requireBranch = null
+    scmVersion {
+        tag {
+            prefix = 'v'
+        }
+        checks {
+            snapshotDependencies = false
+            uncommittedChanges = false
         }
     }
-
 }
 
 dependencies {
