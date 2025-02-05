@@ -55,6 +55,10 @@ subprojects {
             snapshotDependencies = false
             uncommittedChanges = false
         }
+        branch {
+            pattern = 'release*'
+            prefix = 'release-'
+        }
     }
 }
 
