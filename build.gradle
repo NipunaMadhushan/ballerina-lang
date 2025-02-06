@@ -54,9 +54,14 @@ subprojects {
         checks {
             snapshotDependencies = false
             uncommittedChanges = false
+            aheadOfRemote = false  // Skip remote tracking check
         }
-        releaseOnlyOnReleaseBranches = false
-        releaseBranchNames = ['release*']
+
+        // Configure version creation and branching
+        versionCreator('versionWithBranch')
+        branchVersionCreator = [
+                'release/.*': 'versionWithBranch'
+        ]
     }
 }
 
